@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finanzas Personales</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">
+                <i class="fas fa-wallet me-2"></i>
+                Finanzas Personales
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" onclick="showSection('dashboard')">
+                            <i class="fas fa-chart-line me-1"></i>Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('transacciones')">
+                            <i class="fas fa-list me-1"></i>Transacciones
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('estadisticas')">
+                            <i class="fas fa-chart-pie me-1"></i>Estadísticas
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('categorias')">
+                            <i class="fas fa-tags me-1"></i>Categorías
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido Principal -->
+    <div class="container-fluid mt-5 pt-4">
+        <!-- Dashboard -->
+        <div id="dashboard-section" class="section active">
+            <div class="row mb-4">
+                <div class="col-12">
+                    <h2 class="text-primary fw-bold mb-4">
+                        <i class="fas fa-chart-line me-2"></i>Dashboard Financiero
+                    </h2>
+                </div>
+            </div>
+
+            <!-- Tarjetas de Resumen -->
+            <div class="row mb-4">
+                <div class="col-md-3 mb-3">
+                    <div class="card stat-card balance-card">
+                        <div class="card-body text-center">
+                            <i class="fas fa-piggy-bank stat-icon"></i>
+                            <h3 class="stat-value" id="balance-total">$0</h3>
+                            <p class="stat-label">Balance Total</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <div class="card stat-card income-card">
+                        <div class="card-body text-center">
+                            <i class="fas fa-arrow-up stat-icon"></i>
+                            <h3 class="stat-value" id="ingresos-mes">$0</h3>
+                            <p class="stat-label">Ingresos del Mes</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <div class="card stat-card expense-card">
+                        <div class="card-body text-center">
+                            <i class="fas fa-arrow-down stat-icon"></i>
+                            <h3 class="stat-value" id="gastos-mes">$0</h3>
+                            <p class="stat-label">Gastos del Mes</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <div class="card stat-card savings-card">
+                        <div class="card-body text-center">
+                            <i class="fas fa-chart-line stat-icon"></i>
+                            <h3 class="stat-value" id="balance-mes">$0</h3>
+                            <p class="stat-label">Balance del Mes</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botones de Acción Rápida -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="d-flex gap-3 flex-wrap">
+                        <button class="btn btn-primary btn-lg" onclick="showAddTransactionModal('ingreso')">
+                            <i class="fas fa-plus me-2"></i>Agregar Ingreso
+                        </button>
+                        <button class="btn btn-outline-primary btn-lg" onclick="showAddTransactionModal('gasto')">
+                            <i class="fas fa-minus me-2"></i>Agregar Gasto
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gráficas y Transacciones Recientes -->
+            <div class="row">
+                <div class="col-lg-8 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">
+                                <i class="fas fa-chart-bar me-2"></i>Resumen Mensual
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="monthlyChart" height="300"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">
+                                <i class="fas fa-clock me-2"></i>Transacciones Recientes
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div id="recent-transactions">
+                                <!-- Se llena dinámicamente -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección de Transacciones -->
+        <div id="transacciones-section" class="section">
+            <div class="row mb-4">
+                <div class="col-12">
+                    <h2 class="text-primary fw-bold mb-4">
+                        <i class="fas fa-list me-2"></i>Gestión de Transacciones
+                    </h2>
+                </div>
+            </div>
+
+            <!-- Filtros -->
+            <div class="row mb-4">
+                <div class="col-md-3">
+                    <select class="form-select" id="filter-tipo">
+                        <option value="">Todos los tipos</option>
+                        <option value="ingreso">Ingresos</option>
+                        <option value="gasto">Gastos</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <select class="form-select" id="filter-categoria">
+                        <option value="">Todas las categorías</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <input type="date" class="form-control" id="filter-fecha-inicio" placeholder="Fecha inicio">
+                </div>
+                <div class="col-md-3">
+                    <input type="date" class="form-control" id="filter-fecha-fin" placeholder="Fecha fin">
+                </div>
+            </div>
+
+            <!-- Tabla de Transacciones -->
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Descripción</th>
+                                    <th>Categoría</th>
+                                    <th>Tipo</th>
+                                    <th>Monto</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="transactions-table">
+                                <!-- Se llena dinámicamente -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección de Estadísticas -->
+        <div id="estadisticas-section" class="section">
+            <div class="row mb-4">
+                <div class="col-12">
+                    <h2 class="text-primary fw-bold mb-4">
+                        <i class="fas fa-chart-pie me-2"></i>Estadísticas Detalladas
+                    </h2>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Gastos por Categoría</h5>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="categoryChart" height="300"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Tendencias (Últimos 6 Meses)</h5>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="trendsChart" height="300"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección de Categorías -->
+        <div id="categorias-section" class="section">
+            <div class="row mb-4">
+                <div class="col-12">
+                    <h2 class="text-primary fw-bold mb-4">
+                        <i class="fas fa-tags me-2"></i>Gestión de Categorías
+                    </h2>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-12">
+                    <button class="btn btn-primary" onclick="showAddCategoryModal()">
+                        <i class="fas fa-plus me-2"></i>Nueva Categoría
+                    </button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Categorías de Gastos</h5>
+                        </div>
+                        <div class="card-body" id="expense-categories">
+                            <!-- Se llena dinámicamente -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Categorías de Ingresos</h5>
+                        </div>
+                        <div class="card-body" id="income-categories">
+                            <!-- Se llena dinámicamente -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Agregar Transacción -->
+    <div class="modal fade" id="transactionModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="transactionModalTitle">Agregar Transacción</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="transactionForm">
+                        <div class="mb-3">
+                            <label for="transaction-description" class="form-label">Descripción</label>
+                            <input type="text" class="form-control" id="transaction-description" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="transaction-amount" class="form-label">Monto</label>
+                            <input type="number" step="0.01" class="form-control" id="transaction-amount" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="transaction-category" class="form-label">Categoría</label>
+                            <select class="form-select" id="transaction-category" required>
+                                <!-- Se llena dinámicamente -->
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="transaction-date" class="form-label">Fecha</label>
+                            <input type="date" class="form-control" id="transaction-date" required>
+                        </div>
+                        <input type="hidden" id="transaction-type">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="saveTransaction()">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Agregar Categoría -->
+    <div class="modal fade" id="categoryModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Nueva Categoría</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="categoryForm">
+                        <div class="mb-3">
+                            <label for="category-name" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="category-name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="category-type" class="form-label">Tipo</label>
+                            <select class="form-select" id="category-type" required>
+                                <option value="gasto">Gasto</option>
+                                <option value="ingreso">Ingreso</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="category-color" class="form-label">Color</label>
+                            <input type="color" class="form-control form-control-color" id="category-color" value="#FF6B35">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="saveCategory()">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
+

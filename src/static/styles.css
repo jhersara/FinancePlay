@@ -1,0 +1,497 @@
+/* Variables de Colores - Tema Naranja inspirado en Trii */
+:root {
+    --primary-orange: #FF6B35;
+    --secondary-orange: #FF8C42;
+    --accent-yellow: #FFD23F;
+    --dark-orange: #E55A2B;
+    --light-orange: #FFF4F0;
+    --success-green: #2ECC71;
+    --danger-red: #E74C3C;
+    --dark-gray: #2C3E50;
+    --medium-gray: #6C757D;
+    --light-gray: #F8F9FA;
+    --white: #FFFFFF;
+}
+
+/* Estilos Globales */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--light-gray);
+    color: var(--dark-gray);
+    line-height: 1.6;
+}
+
+/* Personalización de Bootstrap */
+.bg-primary {
+    background-color: var(--primary-orange) !important;
+}
+
+.text-primary {
+    color: var(--primary-orange) !important;
+}
+
+.btn-primary {
+    background-color: var(--primary-orange);
+    border-color: var(--primary-orange);
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--dark-orange);
+    border-color: var(--dark-orange);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+}
+
+.btn-outline-primary {
+    color: var(--primary-orange);
+    border-color: var(--primary-orange);
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary-orange);
+    border-color: var(--primary-orange);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+}
+
+/* Navegación */
+.navbar {
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.nav-link {
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    margin: 0 0.25rem;
+}
+
+.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-1px);
+}
+
+.nav-link.active {
+    background-color: rgba(255, 255, 255, 0.2);
+    font-weight: 600;
+}
+
+/* Tarjetas de Estadísticas */
+.stat-card {
+    border: none;
+    border-radius: 20px;
+    padding: 1rem;
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, var(--white) 0%, #FAFAFA 100%);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-orange), var(--secondary-orange));
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.balance-card::before {
+    background: linear-gradient(90deg, var(--primary-orange), var(--accent-yellow));
+}
+
+.income-card::before {
+    background: linear-gradient(90deg, var(--success-green), #27AE60);
+}
+
+.expense-card::before {
+    background: linear-gradient(90deg, var(--danger-red), #C0392B);
+}
+
+.savings-card::before {
+    background: linear-gradient(90deg, var(--secondary-orange), var(--accent-yellow));
+}
+
+.stat-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    opacity: 0.8;
+}
+
+.balance-card .stat-icon {
+    color: var(--primary-orange);
+}
+
+.income-card .stat-icon {
+    color: var(--success-green);
+}
+
+.expense-card .stat-icon {
+    color: var(--danger-red);
+}
+
+.savings-card .stat-icon {
+    color: var(--secondary-orange);
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--dark-gray);
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: var(--medium-gray);
+    font-weight: 500;
+    margin-bottom: 0;
+}
+
+/* Tarjetas Generales */
+.card {
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.card:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.card-header {
+    background: linear-gradient(135deg, var(--light-orange) 0%, #FFF8F5 100%);
+    border-bottom: 2px solid var(--primary-orange);
+    font-weight: 600;
+    color: var(--dark-gray);
+    padding: 1.25rem;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+/* Secciones */
+.section {
+    display: none;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.section.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Formularios */
+.form-control, .form-select {
+    border-radius: 12px;
+    border: 2px solid #E9ECEF;
+    padding: 0.75rem 1rem;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--primary-orange);
+    box-shadow: 0 0 0 0.2rem rgba(255, 107, 53, 0.25);
+}
+
+.form-label {
+    font-weight: 600;
+    color: var(--dark-gray);
+    margin-bottom: 0.75rem;
+}
+
+/* Tabla */
+.table {
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.table th {
+    background-color: var(--light-orange);
+    color: var(--dark-gray);
+    font-weight: 600;
+    border: none;
+    padding: 1rem;
+}
+
+.table td {
+    padding: 1rem;
+    vertical-align: middle;
+    border-color: #F1F3F4;
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(255, 107, 53, 0.05);
+}
+
+/* Badges */
+.badge {
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+}
+
+.badge-income {
+    background-color: var(--success-green);
+    color: white;
+}
+
+.badge-expense {
+    background-color: var(--danger-red);
+    color: white;
+}
+
+/* Transacciones Recientes */
+.transaction-item {
+    padding: 1rem;
+    border-radius: 12px;
+    margin-bottom: 0.75rem;
+    background: linear-gradient(135deg, var(--white) 0%, #FAFAFA 100%);
+    border-left: 4px solid var(--primary-orange);
+    transition: all 0.3s ease;
+}
+
+.transaction-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.transaction-item.income {
+    border-left-color: var(--success-green);
+}
+
+.transaction-item.expense {
+    border-left-color: var(--danger-red);
+}
+
+.transaction-amount {
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.transaction-amount.income {
+    color: var(--success-green);
+}
+
+.transaction-amount.expense {
+    color: var(--danger-red);
+}
+
+.transaction-description {
+    font-weight: 600;
+    color: var(--dark-gray);
+    margin-bottom: 0.25rem;
+}
+
+.transaction-category {
+    font-size: 0.85rem;
+    color: var(--medium-gray);
+}
+
+/* Categorías */
+.category-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 12px;
+    margin-bottom: 0.75rem;
+    background: linear-gradient(135deg, var(--white) 0%, #FAFAFA 100%);
+    border: 2px solid #F1F3F4;
+    transition: all 0.3s ease;
+}
+
+.category-item:hover {
+    border-color: var(--primary-orange);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.category-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 1rem;
+    border: 2px solid white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.category-name {
+    font-weight: 600;
+    color: var(--dark-gray);
+    flex-grow: 1;
+}
+
+/* Modales */
+.modal-content {
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+    background: linear-gradient(135deg, var(--light-orange) 0%, #FFF8F5 100%);
+    border-bottom: 2px solid var(--primary-orange);
+    border-radius: 20px 20px 0 0;
+}
+
+.modal-title {
+    font-weight: 700;
+    color: var(--dark-gray);
+}
+
+.btn-close {
+    filter: none;
+    opacity: 0.7;
+}
+
+.btn-close:hover {
+    opacity: 1;
+}
+
+/* Botones de Acción */
+.btn-sm {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.8rem;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.btn-outline-secondary {
+    border-color: var(--medium-gray);
+    color: var(--medium-gray);
+}
+
+.btn-outline-secondary:hover {
+    background-color: var(--medium-gray);
+    border-color: var(--medium-gray);
+}
+
+.btn-outline-danger {
+    border-color: var(--danger-red);
+    color: var(--danger-red);
+}
+
+.btn-outline-danger:hover {
+    background-color: var(--danger-red);
+    border-color: var(--danger-red);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .stat-card {
+        margin-bottom: 1rem;
+    }
+    
+    .btn-lg {
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+    }
+    
+    .stat-value {
+        font-size: 1.5rem;
+    }
+    
+    .stat-icon {
+        font-size: 2rem;
+    }
+    
+    .card-body {
+        padding: 1rem;
+    }
+    
+    .table-responsive {
+        font-size: 0.9rem;
+    }
+}
+
+/* Animaciones adicionales */
+.fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.slide-up {
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Loading states */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.spinner-border-sm {
+    width: 1rem;
+    height: 1rem;
+}
+
+/* Chart containers */
+canvas {
+    max-height: 400px !important;
+}
+
+/* Scrollbar personalizado */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--light-gray);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-orange);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--dark-orange);
+}
+
